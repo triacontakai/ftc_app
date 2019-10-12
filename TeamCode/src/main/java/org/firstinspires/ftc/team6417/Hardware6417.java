@@ -30,7 +30,6 @@
 package org.firstinspires.ftc.team6417;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -60,9 +59,9 @@ public class Hardware6417
     public DcMotor  leftBack = null;
     public DcMotor  rightBack = null;
 
-    public Servo flip = null;
-    public Servo hand = null;
-    public Servo arm = null;
+    public DcMotor arm = null;
+    public Servo grabHand = null;
+    public Servo dragHand = null;
 
     public static final double TURN_POWER_LIFT =  0.5 ;
 
@@ -85,14 +84,18 @@ public class Hardware6417
         rightFront = hwMap.get(DcMotor.class, "RightFrontDrive");
         rightBack = hwMap.get(DcMotor.class, "RightBackDrive");
 
-        flip = hwMap.get(Servo.class, "flip_servo");
-        hand = hwMap.get(Servo.class, "hand_servo");
-        arm = hwMap.get(Servo.class, "arm_servo");
+        arm = hwMap.get(DcMotor.class, "ArmMotor");
+        dragHand = hwMap.get(Servo.class, "DragHand");
+        grabHand = hwMap.get(Servo.class, "GrabHand");
 
         leftFront.setDirection(DcMotor.Direction.FORWARD);
         leftBack.setDirection(DcMotor.Direction.REVERSE);
         rightFront.setDirection(DcMotor.Direction.FORWARD);
         rightBack.setDirection(DcMotor.Direction.REVERSE);
+
+        arm.setDirection(DcMotor.Direction.FORWARD);
+        dragHand.setDirection(Servo.Direction.FORWARD);
+        grabHand.setDirection(Servo.Direction.FORWARD);
 
 
         // Set all motors to zero power
@@ -101,6 +104,7 @@ public class Hardware6417
         rightFront.setPower(0);
         rightBack.setPower(0);
 
+        arm.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -108,5 +112,7 @@ public class Hardware6417
         leftBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightBack.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }

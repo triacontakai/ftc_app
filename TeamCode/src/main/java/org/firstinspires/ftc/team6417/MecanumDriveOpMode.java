@@ -58,10 +58,6 @@ public class MecanumDriveOpMode extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     Hardware6417 robot = new Hardware6417();
 
-    double forward, strafe, rotate;
-    double frontLeftSpeed, frontRightSpeed, backLeftSpeed, backRightSpeed;
-
-
     @Override
     public void runOpMode() {
 
@@ -82,14 +78,14 @@ public class MecanumDriveOpMode extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            forward = gamepad1.left_stick_y * -1;
-            strafe = gamepad1.left_stick_x;
-            rotate = gamepad1.right_stick_x;
+            double forward = gamepad1.left_stick_y * -1;
+            double strafe = gamepad1.left_stick_x;
+            double rotate = gamepad1.right_stick_x;
 
-            frontLeftSpeed = forward + strafe - rotate;
-            frontRightSpeed = forward - strafe - rotate;
-            backLeftSpeed = forward - strafe + rotate;
-            backRightSpeed = forward + strafe + rotate;
+            double frontLeftSpeed = forward + strafe - rotate;
+            double frontRightSpeed = forward - strafe - rotate;
+            double backLeftSpeed = forward - strafe + rotate;
+            double backRightSpeed = forward + strafe + rotate;
 
             double largest = 1.0;
             largest = Math.max(largest, Math.abs(frontLeftSpeed));
@@ -103,6 +99,12 @@ public class MecanumDriveOpMode extends LinearOpMode {
             robot.leftBack.setPower(backLeftSpeed / largest);
             robot.rightBack.setPower(backRightSpeed / largest);
 
+            // stuff to deal with arm movement
+
+            double armUpPower = gamepad1.right_trigger;
+            double armDownPower = gamepad1.left_trigger;
+
+            robot.arm.setPower(armUpPower - armDownPower);
         }
     }
 }
