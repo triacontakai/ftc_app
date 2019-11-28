@@ -79,7 +79,7 @@ public class MecanumDriveOpMode extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        double forward, strafe, rotate;
+        double forward, strafe, rotate,spinMotorSpeed;
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
@@ -87,7 +87,9 @@ public class MecanumDriveOpMode extends LinearOpMode {
             forward = -gamepad1.left_stick_y;
             strafe = -gamepad1.left_stick_x;
             rotate = gamepad1.right_stick_x;
+            spinMotorSpeed = gamepad1.left_stick_y;
 
+            robot.spinMotor.setPower(spinMotorSpeed);
             setDriveSpeeds(forward, strafe, rotate);
 
             double armUpSpeed = gamepad2.right_trigger;

@@ -20,6 +20,7 @@ public class Auto6417 extends LinearOpMode {
     DcMotor frontright;
     DcMotor backleft;
     DcMotor backright;
+
     //28 * 20 / (2ppi * 4.125)
     Double width = 16.0; //inches
     Integer cpr = 28; //counts per rotation
