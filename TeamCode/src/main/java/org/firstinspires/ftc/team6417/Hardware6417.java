@@ -83,7 +83,7 @@ public class Hardware6417
         rightFront = hwMap.get(DcMotor.class, "FrontRight");
         rightBack = hwMap.get(DcMotor.class, "BackRight");
         armMotor = hwMap.get(DcMotor.class, "ArmMotor");
-        spinMotor = hwMap.get(DcMotor.class, "SpinMotor")
+        spinMotor = hwMap.get(DcMotor.class, "SpinMotor");
         leftFront.setDirection(DcMotor.Direction.FORWARD);
         leftBack.setDirection(DcMotor.Direction.REVERSE);
         rightFront.setDirection(DcMotor.Direction.FORWARD);
